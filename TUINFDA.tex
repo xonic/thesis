@@ -1,0 +1,156 @@
+% $Id: TUINFDA.tex 2050 2010-06-01 17:59:37Z tkren $
+%
+% Vienna University of Technology (TU Vienna) - Faculty of Informatics, 
+% thesis, titlepages
+%
+% This titlepages are using the geometry package, see
+% <http://www.ctan.org/macros/latex/contrib/geometry/geometry.pdf>
+%
+% For questions and comments send an email to
+% Thomas Krennwallner <tkren@kr.tuwien.ac.at>
+%
+
+% setup page dimensions for titlepage
+\newgeometry{left=2.4cm,right=2.4cm,bottom=2.5cm,top=2cm}
+
+% force baselineskip and parindent
+\newlength{\tmpbaselineskip}
+\setlength{\tmpbaselineskip}{\baselineskip}
+\setlength{\baselineskip}{13.6pt}
+\newlength{\tmpparindent}
+\setlength{\tmpparindent}{\parindent}
+\setlength{\parindent}{17pt}
+
+% switch to german language
+\selectlanguage{ngerman}
+
+
+
+%%%%%%%%%%%%%%%%%%%
+% first titlepage %
+%%%%%%%%%%%%%%%%%%%
+%
+\thispagestyle{tuinftitlepage}
+\pagenumbering{alph}
+
+\begin{center}
+   \begin{minipage}[t][6.5cm][b]{\linewidth}
+       \centering
+       % very long titles need tweaking of \baselinestretch{}
+       \renewcommand{\baselinestretch}{0.85} 
+       \thesistitlefontHUGE\sffamily\bfseries \tuinfthesistitle
+   \end{minipage}
+
+   \vspace{1.3cm}{\thesistitlefontLARGE\sffamily \tuinfthesistype}
+
+   \vspace{6mm}{\thesistitlefontlarge\sffamily zur Erlangung des akademischen Grades}
+
+   \vspace{6mm}{\thesistitlefontLARGE\sffamily\bfseries \tuinfthesisdegree}
+
+   \vspace{6mm}{\thesistitlefontlarge\sffamily im Rahmen des Studiums}
+
+   \vspace{6mm}{\thesistitlefontLarge\sffamily\bfseries\tuinfthesiscurriculum}
+
+   \vspace{6.5mm}{\thesistitlefontlarge\sffamily eingereicht von}
+
+   \vspace{6mm}{\thesistitlefontLarge\sffamily\bfseries \tuinfthesisauthor}
+
+   \vspace{1.5mm}{\thesistitlefontlarge\sffamily Matrikelnummer \tuinfthesismatrikelno} 
+
+   \vspace{1.5cm}
+
+   \begin{minipage}[t][1.7cm][t]{\textwidth}
+      \vspace{0pt}\raggedright\thesistitlefontnormalsize\sffamily
+
+      an der
+
+      Fakult\"{a}t f\"{u}r Informatik der Technischen Universit\"{a}t Wien
+   \end{minipage}
+   \begin{minipage}[t][3.5cm][t]{\textwidth}
+      \vspace{0pt}\sffamily\thesistitlefontnormalsize\raggedright
+  
+      Betreuung
+
+      \tuinfthesisbetreuung: \tuinfthesisbetreins
+
+      \raggedright Mitwirkung: \tuinfthesisbetrzwei
+   \end{minipage}
+
+   \begin{minipage}[t][2cm][t]{\textwidth}
+      \vspace{0pt}\sffamily\thesistitlefontnormalsize
+      \begin{tabbing}
+         \hspace{45mm} \= \hspace{65mm} \= \hspace{65mm} \kill
+         Wien, \tuinfthesisdate \> {\raggedright\rule{50mm}{0.5pt}} \> 
+                                   {\raggedright\rule{50mm}{0.5pt}} \\
+         \> \begin{minipage}[t][0.5cm][t]{50mm}
+               \centering (Unterschrift \tuinfthesisverfassung)
+            \end{minipage}
+         \> \begin{minipage}[t][0.5cm][t]{50mm}
+               \centering (Unterschrift \tuinfthesisbetreuung)
+            \end{minipage}
+      \end{tabbing}
+   \end{minipage}
+\end{center}
+
+% flush all material and start a new, unnumbered page
+\pagestyle{empty}
+\cleardoublepage
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+% second titlepage %
+%%%%%%%%%%%%%%%%%%%
+%
+% The second titlepage was created by
+% Michael Sprinzl, 
+% Vienna University of Technology (TU Vienna), Faculty of Informatics, 
+% Institute of Computer Aided Automation, Computer Vision Lab
+%
+% For questions and comments regarding the changes send an email to
+% Michael Sprinzl <michael(dot)sprinzl(at)student(dot)tuwien(dot)ac(dot)at>
+%
+% Note: replace (dot) with . and (at) with @ to get a valid email address!
+%
+\thispagestyle{tuinftitlepage}
+
+\vspace*{7.0cm}
+\begin{center}
+   \thesistitlefontLarge\sffamily\bfseries{Erklärung zur Verfassung der Arbeit}
+\end{center}
+\vspace*{1.5cm}
+\begin{flushright}
+   \tuinfthesisauthor\\\tuinfthesisaddress\\\tuinfthesiszipcode~\tuinfthesiscity
+\end{flushright}
+\vspace*{1.5cm}
+Hiermit erkläre ich, dass ich diese Arbeit selbständig verfasst habe, dass ich 
+die verwendeten Quellen und Hilfsmittel vollständig angegeben habe und dass ich 
+die Stellen der Arbeit~-- einschließlich Tabellen, Karten und Abbildungen~--, 
+die anderen Werken oder dem Internet im Wortlaut oder dem Sinn nach entnommen 
+sind, auf jeden Fall unter Angabe der Quelle als Entlehnung kenntlich gemacht
+habe.
+\begin{minipage}[t][2cm][t]{\textwidth}
+\vspace{1.5cm}
+   \begin{tabbing}
+      \hspace{66mm} \= \hspace{66mm} \= \hspace{51mm} \kill
+      Wien, \tuinfthesisdate \> {\raggedright\rule{51mm}{0.5pt}} \> \\ \> 
+      \begin{minipage}[t][0.5cm][t]{51mm}
+         \centering (Unterschrift \tuinfthesisverfassung)
+      \end{minipage}
+   \end{tabbing}
+\end{minipage}
+\vspace*{1.5cm}
+
+% flush all material and start a new, unnumbered page
+\pagestyle{empty}
+\cleardoublepage
+
+% switch back to english language and proceed with default pagenumbering
+\selectlanguage{english}
+
+% restore baselineskip
+\setlength{\baselineskip}{\tmpbaselineskip}
+\setlength{\parindent}{\tmpparindent}
+
+% restore default geometry
+\restoregeometry

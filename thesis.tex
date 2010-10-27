@@ -1,0 +1,332 @@
+% $Id: thesis.tex 25 2010-07-01 00:39:12Z msprinzl $
+%
+% Vienna University of Technology (TU Vienna) - Faculty of Informatics, 
+% thesis, main document
+%
+% created by Michael Sprinzl, adapted by Robert Sablatnig 
+% Institute of Computer Aided Automation, Computer Vision Lab
+%
+% For questions and comments regarding the changes send an email to
+% Michael Sprinzl <michael(dot)sprinzl(at)student(dot)tuwien(dot)ac(dot)at>
+%
+% Note: replace (dot) with . and (at) with @ to get a valid email address!
+%
+%
+% Q: How do I build thesis.tex? 
+% A: Run the following commands EXACTLY in this order:
+%
+% pdflatex thesis.tex
+% bibtex thesis.aux
+% makeindex thesis.idx -s index.ist -o thesis.ind
+% makeindex thesis.nlo -s nomencl.ist -o thesis.nls
+% pdflatex thesis.tex
+% pdflatex thesis.tex
+
+% The memoir class is for typesetting poetry, fiction, non-fiction, 
+% and mathematical works.							
+\documentclass[a4paper,11pt,oneside]{memoir}
+
+% This memoir style created by Bastiaan Veelo is raggedleft, large,
+% bold and with a black square in the margin by the number line. 
+% It requires the graphicx package.
+\chapterstyle{veelo}
+
+% Use UTF-8 (8-bit UCS Transformation Format)
+% for english and german input encodings.
+\usepackage[utf8]{inputenc}
+\usepackage[english,ngerman]{babel}
+
+% Standard LaTeX package for creating indexes.
+% \usepackage{makeidx}
+
+% Produce lists of symbols as in nomenclature.
+\usepackage[intoc]{nomencl}
+
+% Package for underlining.
+\usepackage[normalem]{ulem}
+
+% define command "markup" for underlining the corresponding characters
+% of an abbreviation; 
+\newcommand{\markup}[1]{\uline{#1}} 
+
+% Enhanced support for graphics, needed by veelo memoir style.
+\usepackage{graphicx}
+% relative path where the graphics that are read with "\includegraphics"
+% are stored; in our case: ~/figures/, where ~ is the current directory.
+\graphicspath{{figures/}}
+
+% Easy access to the Lorem Ipsum dummy text; this package should be removed
+% once all \lipsum commands are gone.
+\usepackage{lipsum}
+
+% AMS (American Mathematical Society) mathematical facilities for LaTeX.
+\usepackage{amsmath}
+
+% A suite of tools for typesetting algorithms in pseudo-code.
+\usepackage{algorithm}
+\usepackage{algorithmic}
+% Change default numbering scheme for algorithms in pseudo-code.
+\numberwithin{algorithm}{chapter}
+
+% Use the styling guidelines for a diploma thesis required by 
+% the Vienna University of Technology, Faculty of Informatics.
+\usepackage{TUINFDA}
+
+% Extensive support for hypertext in LaTeX.
+%
+% The hyperref package has to generate different \specials for different
+% DVI drivers; in particular, xdvi and dvips want "dvips" specials, and 
+% pdftex wants "pdftex" specials. These correspond to package options.
+\makeatletter
+\ifx\pdfpagewidth\@undefined
+   \usepackage[dvips, bookmarks, colorlinks=true, plainpages = false,
+               citecolor = green, urlcolor = blue, filecolor = blue]{hyperref}
+\else
+   \ifnum\pdfoutput=\@ne
+      \usepackage[pdftex, bookmarks, colorlinks=true, plainpages = false,
+               citecolor = green, urlcolor = blue, filecolor = blue]{hyperref}
+   \else
+      \usepackage[dvips, bookmarks, colorlinks=true, plainpages = false,
+               citecolor = green, urlcolor = blue, filecolor = blue]{hyperref}
+   \fi
+\fi
+\makeatother
+
+\makeindex
+\makenomenclature
+
+\begin{document}
+
+
+
+%%%%%%%%%%%%%%%%
+% FRONT MATTER %
+%%%%%%%%%%%%%%%%
+
+\frontmatter
+
+% At CVL the front matter contains
+%    (1) Title pages°
+%    (2) Dedication°
+%    (3a) Abstract (in german, "Kurzfassung")°
+%    (3b) Abstract (in english)°
+%    (4) Acknowledgments°
+%
+% (1) Title pages
+
+% define variables for customizing the layout of the title pages
+\thesistitle{Eine nicht so gute Diplomarbeit erkennt man daran, dass sie einen 
+             so langen Titel hat, dass man nochmal Luft holen muss, um ihn 
+             vollständig auszusprechen}
+
+\thesisdate{10. Oktober 2010}
+\thesisdegree{Master of Science}
+\thesiscurriculum{Medieninformatik}
+
+\thesisverfassung{Verfasserin}
+\thesisauthor{Martina Muster}
+\thesismatrikelno{0123456}
+\thesisaddress{Musterstrasse 12/3/4}
+\thesiszipcode{1234}
+\thesiscity{Musterstadt}
+
+\thesisbetreuung{Betreuer}
+\thesisbetreins{Ao.Univ.Prof. Dipl.-Ing. Dr.techn. Robert Sablatnig}
+\thesisbetrzwei{Univ.Lektor Dipl.-Ing. Dr.techn. Georg Langs}
+
+% Include the title pages for a diploma thesis required by the 
+% Vienna University of Technology, Faculty of Informatics, mentioned in 
+% http://www.informatik.tuwien.ac.at/lehre/richtlinien/index.html
+\include{TUINFDA}
+
+
+% (2) Dedication
+\thispagestyle{empty}
+
+\vspace*{\fill}
+\begin{center}
+   Dedicate this page to whomever you like!
+\end{center}
+\vspace*{\fill}
+
+% use page numbers and start counting from now on
+\pagestyle{plain}
+\pagenumbering{roman}
+
+% flush all material and start a new, numbered page
+\cleardoublepage
+
+
+% (3a) Abstract (in german, "Kurzfassung")
+\renewcommand{\abstractname}{Kurzfassung}
+\begin{abstract}
+Kollaboratives Arbeiten bedeutet das Teilen von Materialien, Dokumenten und Werkzeugen. Herkömmliche, greifbare Medien schaffen eine Kommunikationsebene zwischen den Personen auf der es möglich ist, Gedanken, Ideen und Konzepte rasch und zugänglich aufzubereiten. In der Vergangenheit sind schon einige Versuche unternommen worden, diese Art des Arbeitens auf digitalen Medien umzusetzen. So gibt es bereits Ansätze, die die Zusammenarbeit auf einem gemeinsamen großen Display ermöglichen sollen. Jedoch stößt man bei der Arbeit mit diesen kollaborativen Systemen immer wieder auf Barrieren, da es bisher noch nicht gelungen ist, eine effiziente und transparente Schnittstelle zwischen analogen und digitalen Objekten zu schaffen.
+
+Benutzern soll es mittels Eingabestiften ermöglicht werden, an virtuellen Artefakten auf einem gemeinsamen Display zusammenzuarbeiten. Dadurch haben sie einen einfachen Zugang zu virtuellen Artefakten, an denen sie gemeinsam arbeiten können. Es ist geplant, jedem Benutzer ein pen-based input tablet zu geben, sodass die Eingabegeräte nicht geteilt werden müssen, sondern jedem jederzeit zur Verfügung stehen. Inputs der Benutzer werden mit dem digitalen Content semantisch verknüpft, sodass sich Änderungen des Contents ebenso auf die Inputs auswirken. Zusätzlich werden die Vorteile von analogen und digitalen Medien zusammengeführt.
+
+Nach einer gemeinsamen, fundierten Literaturrecherche, wird sich jeder von uns auf ein spezielles Teilgebiet konzentrieren. Clemens Sagmeister erarbeitet die Theorie von Design und die Relevanz von Sketching im Designprozess und vertieft die gewonnenen Erkenntnisse mit unserer eigenen Erfahrung im Softwareentwicklungsprozess. Thomas Nägele beschäftigt sich mit den Aspekten von kollaborativem Design und stellt den Bezug zu CSCW her, konzentriert sich dabei aber, anders als viele bisherige wissenschaftliche Arbeiten, auf die Zusammenarbeit an einem einzelnen Computer im selben Raum. Außerdem erörtert Thomas die technische Herangehensweise und Lösung der aufgetretenen Schwierigkeiten bei der Entwicklung unserer Software.
+
+Derzeit existieren vergleichbare Systeme mit der großen Einschränkung, dass Content und Input nicht mit einander verknüpft werden. \cite{Olsen:2004p27} Eine Annäherung bietet 'Screencrayons' \cite{Tse:2004p180} welches erlaubt Notizen auf Desktop und Programmen zu erstellen. Jedoch bringt es Content und Input nur in eine statische Scheinbeziehung. Änderungen am Content haben keine Auswirkung auf den Input. Zusätzlich entstehen Probleme durch die notwendige Selektion eines Werkzeugs am Computer \cite{Saund:2003p66} und diesbezügliche Interferenzen mehrerer, an einem Workspace gleichzeitig arbeitender Partizipienten. \cite{BasteaForte:2007p123}
+\end{abstract}
+
+% flush all material and start a new, numbered page
+\cleardoublepage
+
+
+% (3b) Abstract (in english)
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+   \lipsum[1-4]
+\end{abstract}
+
+% flush all material and start a new, numbered page
+\cleardoublepage
+
+
+% (4) Acknowledgments
+\renewcommand{\abstractname}{Acknowledgments}
+\begin{abstract}
+   \lipsum[5-9]
+\end{abstract}
+
+% flush all material and start a new, numbered page 
+\cleardoublepage
+
+
+% (5) Table of Contents (ToC)
+%
+% anything up to division "\subsection" will be listed within ToC
+%
+% Division        tocdepth
+%   
+% \chapter        0
+% \section        1
+% \subsection     2                  
+% \subsubsection  3
+
+\setcounter{tocdepth}{2}
+
+% define, what should NOT be listed within ToC
+\begin{KeepFromToc}
+
+   % create ToC
+   \tableofcontents
+\end{KeepFromToc}
+
+% flush all material and start a new, numbered page 
+\cleardoublepage
+
+%%%%%%%%%%%%%%%%
+% MAIN MATTER %
+%%%%%%%%%%%%%%%%
+
+\mainmatter
+
+% according to [1], the main matter contains
+%    (1) Inner chapters
+%    (2) Appendices
+
+% the \mainmatter commands resets the section numbering,
+% therefore it has to be set again now
+%
+% Division        secnumdepth
+%   
+% \chapter        0
+% \section        1
+% \subsection     2                  
+% \subsubsection  3
+% \paragraph      4
+% \subparagraph   5
+\setcounter{secnumdepth}{2}
+
+\pagenumbering{arabic}
+
+% according to [1], the introduction contains
+%    (1) subject or problem addressed in the thesis
+%    (2) purpose of thesis: Motivation!
+%    (3) scope of discussion
+%    (4) description of state of the art
+%    (5) definition of terms
+%    (6) explanation of methods and principle results
+%    (7) organization of thesis
+
+\input{chapters/motivation}
+\input{chapters/researchField}
+\input{chapters/kollaborativesDesign}
+\input{chapters/singleVsGroupDesign}
+\input{chapters/cscw}
+\input{chapters/gespraeche}
+\input{chapters/projekt}
+\input{chapters/fazit}
+
+\appendix
+\chapter{Appendix A}
+\lipsum[1]
+\section{Appendix A, Section 1}
+\lipsum[2-3]
+\section{Appendix A, Section 2}
+\lipsum[4-5]
+\section{Appendix A, Section 3}
+\lipsum[6-7]
+
+\chapter{Appendix B}
+\lipsum[1]
+\section{Appendix B, Section 1}
+\lipsum[2-3]
+\section{Appendix B, Section 2}
+\lipsum[4-5]
+\section{Appendix B, Section 3}
+\lipsum[6-7]
+
+\chapter{Appendix C}
+\lipsum[1]
+\section{Appendix C, Section 1}
+\lipsum[2-3]
+\section{Appendix C, Section 2}
+\lipsum[4-5]
+\section{Appendix C, Section 3}
+\lipsum[6-7]
+
+% flush all material and start a new, numbered page 
+\cleardoublepage
+
+
+
+%%%%%%%%%%%%%%%
+% BACK MATTER %
+%%%%%%%%%%%%%%%
+
+\backmatter
+
+% according to [1], the back matter contains
+%    (1) Bibliography
+%    (2) List of Acronyms
+%    (3) Index
+
+% (1) Bibliography
+\bibliography{bib/thesis}{}
+\bibliographystyle{plain}
+
+% (2) List of Acronyms
+\printnomenclature
+
+% (3) Index
+\printindex
+
+% flush all material and start a new, numbered page 
+\cleardoublepage
+
+% according to [1], the last thesis page (in german, "Schmutzblatt")
+% has to be empty and unnumbered
+\thispagestyle{empty}
+\begin{center}
+\end{center}
+
+\end{document}
+
+
+
+% References
+% [1] Lapo F. Mori. Writing a thesis with LaTeX. 
+%                   The PracTeX Journal, 4(1):16–55, April 2008.                                       
+

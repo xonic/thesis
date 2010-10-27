@@ -1,0 +1,28 @@
+#!/bin/bash
+BN=thesis
+pdflatex -interaction=nonstopmode $BN.tex
+bibtex $BN.aux
+makeindex $BN.idx -s index.ist -o $BN.ind
+makeindex $BN.nlo -s nomencl.ist -o $BN.nls
+pdflatex $BN.tex
+pdflatex $BN.tex
+rm -rf $BN.aux
+rm -rf $BN.lof
+rm -rf $BN.lot
+rm -rf $BN.out
+rm -rf $BN.toc
+rm -rf $BN.bbl
+rm -rf $BN.blg
+rm -rf $BN.brf
+rm -rf $BN.idx
+rm -rf $BN.glo
+rm -rf $BN.ist
+rm -rf $BN.glg
+rm -rf $BN.gls
+rm -rf $BN.ilg
+rm -rf $BN.ind
+rm -rf $BN.nlo
+rm -rf $BN.nls
+rm -rf TUINFDA.aux
+rm -rf texput.log
+echo "Compiled your thesis man! I'm on a horse."
